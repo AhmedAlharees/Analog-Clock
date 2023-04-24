@@ -1,0 +1,83 @@
+$font-size: 2rem;
+@mixin setDiminsions($width, $hight) {
+  width: $width;
+  height: $hight;
+}
+@mixin backgroundShadow {
+  box-shadow: 5px 5px 5px black;
+}
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Abril Fatface", cursive;
+}
+
+body {
+  height: 100vh;
+  background-color: rgba(80, 162, 255, 0.724);
+  @include flexCenter;
+  flex-direction: column;
+}
+
+header {
+  font-size: $font-size + 1rem;
+  margin: 1rem;
+}
+.main__clock {
+  background-color: wheat;
+  border: 20px solid rgb(126, 98, 98);
+  border-radius: 50%;
+  position: relative;
+  @include flexCenter;
+  @include setDiminsions(600px, 600px);
+  @include backgroundShadow;
+
+  &__number {
+    @include setDiminsions(500px, 500px);
+    position: absolute;
+    text-align: center;
+    border-radius: 50%;
+    font-size: $font-size;
+  }
+  &__hand {
+    position: absolute;
+    bottom: 50%;
+    transform-origin: bottom;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid white;
+    --rotation: 0deg;
+    transform: rotate(var(--rotation));
+    @include backgroundShadow;
+  }
+  &__secondHand {
+    @include setDiminsions(5px, 210px);
+    background-color: red;
+  }
+  &__minuteHand {
+    @include setDiminsions(10px, 190px);
+    background-color: black;
+  }
+  &__hourHand {
+    @include setDiminsions(20px, 150px);
+    background-color: black;
+  }
+  &__circle {
+    @include setDiminsions(50px, 50px);
+    background-color: rgb(239, 137, 12);
+    border-radius: 50%;
+    z-index: 10;
+  }
+}
+@for $i from 1 through 12 {
+  .number#{$i} {
+    transform: rotate(30deg * $i);
+  }
+}
